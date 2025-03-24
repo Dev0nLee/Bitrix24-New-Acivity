@@ -10,3 +10,4 @@ Add new pause activity in Business processes
    `composer install`
 4. Залить на сервер
 5. Поменять на свой хост в файле `install.php`
+6. При добавлении локального приложения в Bitrix24 указать путь обработчика - путь на сервере до `pause_handler.php`, а путь первоначальной установки - `install.php`
