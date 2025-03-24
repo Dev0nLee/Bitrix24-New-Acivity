@@ -3,9 +3,9 @@ Add new pause activity in Business processes
 
 Установка:
 1. Склонировать репозиторий
-   `git clone <URL_репозитория>`
+   `git clone https://github.com/Dev0nLee/Bitrix24-New-Acivity.git`
 2. Перейти в папку проекта
-   `cd <название_папки>`
+   `cd Bitrix24-New-Acivity`
 3. Установить зависимости
    `composer install`
 4. Залить на сервер
