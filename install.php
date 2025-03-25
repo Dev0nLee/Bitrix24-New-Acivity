@@ -2,23 +2,6 @@
 
 declare(strict_types=1);
 
-use Bitrix24\SDK\Core\Credentials\ApplicationProfile;
-use Bitrix24\SDK\Services\ServiceBuilderFactory;
-use Symfony\Component\HttpFoundation\Request;
-
-require_once 'vendor/autoload.php';
-
-$appProfile = ApplicationProfile::initFromArray([
-    'BITRIX24_PHP_SDK_APPLICATION_CLIENT_ID' => 'your_client_id',
-    'BITRIX24_PHP_SDK_APPLICATION_CLIENT_SECRET' => 'your_client_secret',
-    'BITRIX24_PHP_SDK_APPLICATION_SCOPE' => 'crm,user_basic,placement,bizproc'
-]);
-
-$B24 = ServiceBuilderFactory::createServiceBuilderFromPlacementRequest(
-    Request::createFromGlobals(), 
-    $appProfile
-);
-
 require_once __DIR__ . '/crest.php';
 
 $result = CRest::installApp();
@@ -27,7 +10,7 @@ echo json_encode($result);
 
 $activityParams = [
     'CODE' => 'pause_action',
-    'HANDLER' => 'your_domain/pause_handler.php',
+    'HANDLER' => 'https://grudgingly-plentiful-crow.cloudpub.ru/pause_handler.php',
     'AUTH_USER_ID' => 1,
     'USE_SUBSCRIPTION' => 'Y',
     'NAME' => [
@@ -91,12 +74,9 @@ $activityParams = [
     ]
 ];
 
-try {
-    $response = $B24->core->call('bizproc.activity.add', $activityParams);
-    
-    $result = $response->getResponseData()->getResult();
+$result = CRest::call(
+    'bizproc.activity.add',
+    $activityParams);
     echo "Действие успешно добавлено.";
-} catch (\Exception $e) {
-    echo "Ошибка при добавлении действия: " . $e->getMessage();
-}
+
 ?>
