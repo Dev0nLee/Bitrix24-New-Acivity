@@ -9,8 +9,8 @@ use Symfony\Component\HttpFoundation\Request;
 require_once 'vendor/autoload.php';
 
 $appProfile = ApplicationProfile::initFromArray([
-    'BITRIX24_PHP_SDK_APPLICATION_CLIENT_ID' => 'local.67e29f9bd39222.73091908',
-    'BITRIX24_PHP_SDK_APPLICATION_CLIENT_SECRET' => 'ebUppZw6yuqIbqfsG472mTKHo6BRT5rl6eLAEX0qCIVVGXzVkI',
+    'BITRIX24_PHP_SDK_APPLICATION_CLIENT_ID' => 'your_client_id',
+    'BITRIX24_PHP_SDK_APPLICATION_CLIENT_SECRET' => 'your_client_secret',
     'BITRIX24_PHP_SDK_APPLICATION_SCOPE' => 'crm,user_basic,placement,bizproc'
 ]);
 
@@ -27,7 +27,7 @@ echo json_encode($result);
 
 $activityParams = [
     'CODE' => 'pause_action',
-    'HANDLER' => 'https://grudgingly-plentiful-crow.cloudpub.ru/pause_handler.php',
+    'HANDLER' => 'your_domain/pause_handler.php',
     'AUTH_USER_ID' => 1,
     'USE_SUBSCRIPTION' => 'Y',
     'NAME' => [
