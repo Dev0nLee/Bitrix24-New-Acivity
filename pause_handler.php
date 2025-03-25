@@ -1,6 +1,8 @@
 <?php
 header('Content-Type: application/json');
 
+require_once('crest.php');
+
 $inputData = file_get_contents('php://input');
 $data = json_decode($inputData, true);
 
@@ -42,19 +44,11 @@ $responseData = [
     ]
 ];
 
-$ch = curl_init("https://{$domain}/rest/bizproc.event.send.json");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($responseData));
-curl_setopt($ch, CURLOPT_HEADER, false);
-
-$result = curl_exec($ch);
-$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
-
-file_put_contents('debug.log', date('Y-m-d H:i:s') . " - Event sent to Bitrix24, HTTP Code: $httpCode, Response: " . $result . "\n", FILE_APPEND);
-
-if ($httpCode === 200 && json_decode($result, true)['result'] === true) {
+$result = CRest::call(
+    'bizproc.event.send',
+    $responseData
+);
+if (isset($result['result']) && $result['result'] === true) {
     $response = [
         'result' => true,
         'message' => 'Event sent successfully'
@@ -62,7 +56,7 @@ if ($httpCode === 200 && json_decode($result, true)['result'] === true) {
 } else {
     $response = [
         'result' => false,
-        'error' => 'Failed to send event to Bitrix24: ' . $result
+        'error' => 'Failed to send event to Bitrix24: ' . (isset($result['error']) ? $result['error'] . ' - ' . ($result['error_information'] ?? '') : 'Unknown error')
     ];
 }
 
