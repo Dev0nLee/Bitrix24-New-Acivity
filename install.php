@@ -10,7 +10,7 @@ echo json_encode($result);
 
 $activityParams = [
     'CODE' => 'pause_action',
-    'HANDLER' => 'https://grudgingly-plentiful-crow.cloudpub.ru/pause_handler.php',
+    'HANDLER' => 'your_domain/pause_handler.php',
     'AUTH_USER_ID' => 1,
     'USE_SUBSCRIPTION' => 'Y',
     'NAME' => [
