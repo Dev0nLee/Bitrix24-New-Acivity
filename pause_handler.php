@@ -22,12 +22,11 @@ if (!isset($data['properties']) || !isset($data['auth']) || !isset($data['event_
 }
 
 $pauseValue = $data['properties']['pause_value'] ?? 0;
-$pauseType = $data['properties']['pause_type'] ?? 'seconds';
 $authToken = $data['auth']['access_token']; 
 $eventToken = $data['event_token'];
 $domain = $data['auth']['domain']; 
 
-$seconds = ($pauseType === 'minutes') ? $pauseValue * 60 : $pauseValue;
+$seconds = $pauseValue;
 
 file_put_contents('debug.log', date('Y-m-d H:i:s') . " - Starting pause for " . $seconds . " seconds\n", FILE_APPEND);
 

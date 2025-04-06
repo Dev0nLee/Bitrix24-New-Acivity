@@ -10,7 +10,7 @@ echo json_encode($result);
 
 $activityParams = [
     'CODE' => 'pause_action',
-    'HANDLER' => 'your_domain/pause_handler.php',
+    'HANDLER' => 'https://grudgingly-plentiful-crow.cloudpub.ru/pause_handler.php',
     'AUTH_USER_ID' => 1,
     'USE_SUBSCRIPTION' => 'Y',
     'NAME' => [
@@ -36,30 +36,6 @@ $activityParams = [
             'Multiple' => 'N',
             'Default' => 1
         ],
-        'pause_type' => [
-            'Name' => [
-                'ru' => 'Тип паузы (минуты/секунды)',
-                'en' => 'Type pause (minutes/seconds)'
-            ],
-            'Description' => [
-                'ru' => 'Выберите тип паузы',
-                'en' => 'Select pause type'
-            ],
-            'Type' => 'select',
-            'Required' => 'Y',
-            'Multiple' => 'N',
-            'Options' => [
-                'seconds' => [
-                    'ru' => 'секунды',
-                    'en' => 'seconds'
-                ],
-                'minutes' => [
-                    'ru' => 'минуты',
-                    'en' => 'minutes'
-                ]
-            ],
-            'Default' => 'seconds'
-        ]
     ],
     'RETURN_PROPERTIES' => [
         'select_seconds' => [
